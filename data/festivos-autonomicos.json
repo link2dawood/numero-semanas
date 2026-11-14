@@ -1,0 +1,24 @@
+{
+  "source": "Calendarios laborales publicados por las comunidades autónomas en el BOE; verificar posibles traslados por coincidencia con domingo.",
+  "communities": [
+    { "name": "Andalucía", "slug": "andalucia", "dates": { "2026": ["2026-02-28"], "2027": ["2027-02-28"] } },
+    { "name": "Aragón", "slug": "aragon", "dates": { "2026": ["2026-04-23"], "2027": ["2027-04-23"] } },
+    { "name": "Asturias", "slug": "asturias", "dates": { "2026": ["2026-09-08"], "2027": ["2027-09-08"] } },
+    { "name": "Illes Balears", "slug": "illes-balears", "dates": { "2026": ["2026-03-01"], "2027": ["2027-03-01"] } },
+    { "name": "Canarias", "slug": "canarias", "dates": { "2026": ["2026-05-30"], "2027": ["2027-05-30"] } },
+    { "name": "Cantabria", "slug": "cantabria", "dates": { "2026": ["2026-07-28"], "2027": ["2027-07-28"] } },
+    { "name": "Castilla-La Mancha", "slug": "castilla-la-mancha", "dates": { "2026": ["2026-05-31"], "2027": ["2027-05-31"] } },
+    { "name": "Castilla y León", "slug": "castilla-y-leon", "dates": { "2026": ["2026-04-23"], "2027": ["2027-04-23"] } },
+    { "name": "Cataluña", "slug": "cataluna", "dates": { "2026": ["2026-09-11"], "2027": ["2027-09-11"] } },
+    { "name": "Comunitat Valenciana", "slug": "comunitat-valenciana", "dates": { "2026": ["2026-10-09"], "2027": ["2027-10-09"] } },
+    { "name": "Extremadura", "slug": "extremadura", "dates": { "2026": ["2026-09-08"], "2027": ["2027-09-08"] } },
+    { "name": "Galicia", "slug": "galicia", "dates": { "2026": ["2026-07-25"], "2027": ["2027-07-25"] } },
+    { "name": "Comunidad de Madrid", "slug": "comunidad-de-madrid", "dates": { "2026": ["2026-05-02"], "2027": ["2027-05-02"] } },
+    { "name": "Región de Murcia", "slug": "region-de-murcia", "dates": { "2026": ["2026-06-09"], "2027": ["2027-06-09"] } },
+    { "name": "Navarra", "slug": "navarra", "dates": { "2026": ["2026-12-03"], "2027": ["2027-12-03"] } },
+    { "name": "País Vasco", "slug": "pais-vasco", "dates": { "2026": ["2026-10-25"], "2027": ["2027-10-25"] } },
+    { "name": "La Rioja", "slug": "la-rioja", "dates": { "2026": ["2026-06-09"], "2027": ["2027-06-09"] } },
+    { "name": "Ceuta", "slug": "ceuta", "dates": { "2026": ["2026-09-02"], "2027": ["2027-09-02"] } },
+    { "name": "Melilla", "slug": "melilla", "dates": { "2026": ["2026-09-17"], "2027": ["2027-09-17"] } }
+  ]
+}

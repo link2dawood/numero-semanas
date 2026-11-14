@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-page: #f6f2e8;
+  --color-card: #fffdf8;
+  --color-cream: #ebe4d3;
+  --color-panel: #f1ecdf;
+  --color-border: #e0d8c4;
+  --color-mint: #cbd9c9;
+  --color-tan: #c4af83;
+  --color-sage: #7e8f69;
+  --color-olive: #627545;
+  --color-olive-dark: #3f4f2c;
+  --color-ink: #2b3620;
+  --color-muted: #4f5a40;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Only provide a default color to unstyled content links. Styled links such as
+   navigation items, footer links and CTA buttons must keep their utility color. */
+a:not([class]) {
+  color: var(--color-olive-dark);
+}
+
+a:not([class]):hover {
+  color: var(--color-ink);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+.ad-slot {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  color: var(--color-muted);
+}
+
+.ad-slot-placeholder {
+  border: 1px dashed var(--color-tan);
+  background: var(--color-cream);
+}
+
+.ad-slot-leaderboard {
+  min-height: 90px;
+  max-width: 728px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.ad-slot-rectangle {
+  min-height: 250px;
+  max-width: 300px;
+  align-self: center;
+  border-radius: 24px;
+}
+
+.ad-slot-responsive {
+  min-height: 250px;
+  border-radius: 24px;
+}
+
+@media (max-width: 767px) {
+  .ad-slot-leaderboard {
+    min-height: 100px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ad-slot-responsive {
+    min-height: 90px;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+
+  body {
+    background: #fbfaf4 !important;
+    color: #2b3620;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  table tr,
+  section {
+    break-inside: avoid;
+  }
+
+  .calendar-print-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 7mm !important;
+  }
+
+  .calendar-print-month {
+    border: 1px solid #c9c3ad !important;
+    border-top: 4px solid #627545 !important;
+    border-radius: 10px !important;
+    padding: 3.5mm !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgb(63 79 44 / 8%);
+  }
+
+  .calendar-print-month h3 {
+    color: #3f4f2c !important;
+    font-size: 14px !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .calendar-print-month [role="cell"],
+  .calendar-print-month [role="rowheader"] {
+    min-height: 5.5mm !important;
+    font-size: 8px !important;
+  }
+
+  .calendar-print-legend {
+    margin-top: 6mm !important;
+    padding: 3mm 4mm !important;
+    border-left: 4px solid #c4af83;
+    background: #f0eddf !important;
+    font-size: 9px !important;
+  }
+}
