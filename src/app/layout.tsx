@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -7,20 +6,6 @@ import SiteChrome from "@/components/SiteChrome";
 import { SITE_URL } from "@/lib/site";
 import { isoWeek, parseIsoDate } from "@/lib/weeks";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space",
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -54,7 +39,7 @@ export default function RootLayout({
 
   return (
     <html lang="es-ES" translate="no" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      <body className="antialiased">
         <SiteChrome>
           <Header week={week} weekYear={weekYear} />
         </SiteChrome>

@@ -16,8 +16,6 @@
  * - generic anchor text ("aquí", "leer más", …) and empty anchors
  * Exit code 1 on any error-level finding.
  */
-import { request as httpRequest } from "node:http";
-import { request as httpsRequest } from "node:https";
 import { consolidatedRedirects, yearAliasRedirects } from "../src/lib/redirects";
 import { SITE_URL } from "../src/lib/site";
 
@@ -87,20 +85,6 @@ async function fetchWithHops(path: string): Promise<PageResult> {
     };
   }
   return { path, hops, status: -2, finalPath: current };
-}
-
-/** GET with an explicit Host header (fetch/undici silently drops it). */
-function rawGet(url: string, host: string): Promise<{ status: number; location: string }> {
-  const target = new URL(url);
-  const send = target.protocol === "https:" ? httpsRequest : httpRequest;
-  return new Promise((resolvePromise, reject) => {
-    const req = send(target, { method: "GET", headers: { host } }, (res) => {
-      res.resume();
-      resolvePromise({ status: res.statusCode ?? 0, location: String(res.headers.location ?? "") });
-    });
-    req.on("error", reject);
-    req.end();
-  });
 }
 
 function attr(html: string, tagPattern: RegExp, name: string): string | undefined {
@@ -258,28 +242,6 @@ async function main() {
     }),
   );
   for (const chain of chainReport) warnings.push(`redirect chain (${chain})`);
-
-  // --- preferred host: every www variant must reach its final https URL in one 301
-  const wwwCases: [string, string][] = [
-    ["/", "/"],
-    ["/semanas-2026/?a=1", "/semanas-2026?a=1"],
-    ...[...consolidatedRedirects, ...yearAliasRedirects].map(
-      ({ source, destination }) => [`${source}/`, destination] as [string, string],
-    ),
-  ];
-  for (const [source, destination] of wwwCases) {
-    try {
-      const www = await rawGet(baseUrl + source, `www.${preferredHost}`);
-      const location = www.location;
-      const expected = destination === "/" ? `${SITE_URL}/` : SITE_URL + destination;
-      if (www.status !== 301 || location !== expected) {
-        errors.push(`www${source}: expected one 301 to ${expected}, got ${www.status} ${location}`);
-      }
-    } catch (error) {
-      warnings.push(`www host check skipped (${String(error)})`);
-      break;
-    }
-  }
 
   // --- page-level checks --------------------------------------------------
   const sitemapSet = new Set(sitemap);

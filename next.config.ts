@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // URL normalisation lives in src/middleware.ts: consolidated pages (301, see
-  // src/lib/redirects.ts), trailing slashes (308) and the www host (301), combined
-  // so that e.g. www…/semana-par-o-impar/ reaches its final URL in one hop.
+  // Path normalisation lives in src/middleware.ts: consolidated pages (301, see
+  // src/lib/redirects.ts) and trailing slashes (308), combined into one hop.
   skipTrailingSlashRedirect: true,
   // Next 15 streams metadata of dynamic pages (the home page) into <body> for
   // user agents outside its "HTML-limited bots" list, Googlebot included.
