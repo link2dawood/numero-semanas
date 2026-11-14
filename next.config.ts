@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  distDir: process.env.NODE_ENV === "production" ? ".next-production" : ".next",
   // URL normalisation lives in src/middleware.ts: consolidated pages (301, see
   // src/lib/redirects.ts), trailing slashes (308) and the www host (301), combined
   // so that e.g. www…/semana-par-o-impar/ reaches its final URL in one hop.
