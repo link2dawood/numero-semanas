@@ -97,7 +97,7 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={() => chooseConsent("accepted")}
-              className="min-h-11 rounded-full bg-olive-dark px-5 font-semibold text-white hover:bg-olive"
+              className="min-h-11 rounded-full bg-[#1E2B20] px-5 font-semibold text-white hover:bg-[#2A3C2D]"
             >
               Permitir cookies de analítica
             </button>

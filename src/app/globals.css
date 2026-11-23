@@ -1,27 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --font-inter: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  --font-space: "Arial Rounded MT Bold", "Trebuchet MS", ui-sans-serif,
-    system-ui, sans-serif;
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 @theme inline {
-  --color-page: #f6f2e8;
-  --color-card: #fffdf8;
-  --color-cream: #ebe4d3;
-  --color-panel: #f1ecdf;
-  --color-border: #e0d8c4;
-  --color-mint: #cbd9c9;
-  --color-tan: #c4af83;
-  --color-sage: #7e8f69;
-  --color-olive: #627545;
-  --color-olive-dark: #3f4f2c;
-  --color-ink: #2b3620;
-  --color-muted: #4f5a40;
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-space);
+  /* Sand palette */
+  --color-sand-50: #FDFBF7;
+  --color-sand-100: #F7F5EE;
+  --color-sand-200: #EFECE1;
+  --color-sand-300: #E2DDCF;
+  --color-sand-400: #C7C0AF;
+  --color-sand-border: #E9E4D8;
+
+  /* Forest palette */
+  --color-forest-900: #141E16;
+  --color-forest-800: #1E2B20;
+  --color-forest-700: #2A3C2D;
+  --color-forest-600: #3D5441;
+  --color-forest-500: #4E6A53;
+
+  /* Olive palette */
+  --color-olive-700: #525B40;
+  --color-olive-600: #687252;
+  --color-olive-500: #7E8A65;
+  --color-olive-100: #EEF0E6;
+  --color-olive-50: #F6F7F2;
+
+  /* Accent colors */
+  --color-amber-soft: #D97706;
+  --color-amber-300: #FCD34D;
+  --color-amber-400: #FBBF24;
+
+  /* Semantic aliases for backward compatibility */
+  --color-page: #F7F5EE;
+  --color-card: #FFFFFF;
+  --color-cream: #F7F5EE;
+  --color-panel: #FDFBF7;
+  --color-border: #E9E4D8;
+  --color-mint: #EEF0E6;
+  --color-tan: #C7C0AF;
+  --color-sage: #7E8A65;
+  --color-olive: #687252;
+  --color-olive-dark: #525B40;
+  --color-forest: #1E2B20;
+  --color-ink: #263028;
+  --color-muted: #57534e;
+
+  /* Typography - uses Next.js font variables when available */
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+
+  /* Shadows */
+  --shadow-subtle: 0 4px 20px -2px rgba(30, 43, 32, 0.05);
+  --shadow-card: 0 8px 30px -4px rgba(30, 43, 32, 0.07);
+  --shadow-elevated: 0 14px 40px -6px rgba(30, 43, 32, 0.12);
 }
 
 * {
@@ -34,19 +69,24 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-page);
-  color: var(--color-ink);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  background-color: #F7F5EE;
+  color: #263028;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Only provide a default color to unstyled content links. Styled links such as
-   navigation items, footer links and CTA buttons must keep their utility color. */
+::selection {
+  background-color: #1E2B20;
+  color: white;
+}
+
 a:not([class]) {
-  color: var(--color-olive-dark);
+  color: #1E2B20;
 }
 
 a:not([class]):hover {
-  color: var(--color-ink);
+  color: #2A3C2D;
 }
 
 button,
@@ -66,10 +106,30 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--color-olive);
+  outline: 3px solid #687252;
   outline-offset: 2px;
 }
 
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #EFECE1;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #C7C0AF;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #7E8A65;
+}
+
+/* Ad slots */
 .ad-slot {
   display: flex;
   box-sizing: border-box;
@@ -79,12 +139,12 @@ summary:focus-visible {
   flex-direction: column;
   gap: 4px;
   padding: 12px;
-  color: var(--color-muted);
+  color: #57534e;
 }
 
 .ad-slot-placeholder {
-  border: 1px dashed var(--color-tan);
-  background: var(--color-cream);
+  border: 1px dashed #C7C0AF;
+  background: #EFECE1;
 }
 
 .ad-slot-leaderboard {
@@ -118,6 +178,7 @@ summary:focus-visible {
   }
 }
 
+/* Print styles */
 @page {
   size: A4;
   margin: 14mm;
@@ -184,4 +245,9 @@ summary:focus-visible {
     background: #f0eddf !important;
     font-size: 9px !important;
   }
+}
+
+/* Details/Summary accordion styling */
+details summary::-webkit-details-marker {
+  display: none;
 }

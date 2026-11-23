@@ -6,6 +6,8 @@ export type SiteLink = {
 export type Faq = {
   question: string;
   answer: string;
+  tag?: string;
+  note?: string;
 };
 
 export const navigationLinks: SiteLink[] = [
@@ -173,30 +175,37 @@ export function getFaqs(week: number, nextWeek: number, year: number, yearWeeks:
   return [
     {
       question: "¿Qué semana es hoy?",
-      answer: `Hoy estamos en la semana ${week} (${parity}). El número de semana se actualiza automáticamente cada lunes.`,
+      answer: `Hoy nos encontramos en la <strong>Semana ${week}</strong> del año (según la norma internacional <strong>ISO 8601</strong>). El número de semana se actualiza automáticamente cada lunes.`,
+      tag: "Semana actual",
+      note: "Este dato se actualiza en tiempo real de acuerdo a tu huso horario local.",
     },
     {
       question: "¿Cómo se calcula el número de semana?",
       answer:
-        "En España se usa la norma ISO 8601: la semana empieza el lunes y la primera semana del año es la que contiene el primer jueves.",
+        "En España se usa la <strong>norma ISO 8601</strong>: la semana empieza el lunes y la primera semana del año es la que contiene el primer jueves de enero.",
+      tag: "Norma ISO 8601",
     },
     {
       question: "¿Cuántas semanas tiene un año?",
-      answer: `La mayoría de los años tienen 52 semanas, pero algunos tienen 53. ${year} tiene ${yearWeeks} semanas.`,
+      answer: `La mayoría de los años tienen <strong>52 semanas</strong>, pero algunos tienen <strong>53</strong>. El año ${year} tiene exactamente ${yearWeeks} semanas según el calendario ISO.`,
+      tag: "52 o 53 semanas",
     },
     {
       question: "¿Esta semana es par o impar?",
-      answer: `La semana ${week} es ${parity} y la próxima, la semana ${nextWeek}, es ${nextParity}.`,
+      answer: `La semana ${week} es <strong>${parity}</strong> y la próxima, la semana ${nextWeek}, es <strong>${nextParity}</strong>. Esto es útil para planificar turnos y rotaciones.`,
+      tag: "Planificación",
     },
     {
       question: "¿Cómo encuentro el número de semana de una fecha?",
       answer:
-        "Elige la fecha en el selector de la parte superior de la página y verás al instante el número de semana y sus fechas.",
+        "Elige la fecha en el <strong>selector de la parte superior</strong> de la página y verás al instante el número de semana y sus fechas de inicio y fin.",
+      tag: "Buscador",
     },
     {
       question: "¿NumeroSemanas es gratis?",
       answer:
-        "Sí. Todas las herramientas, calendarios y PDF imprimibles son gratuitos.",
+        "Sí, <strong>100% gratuito</strong>. Todas las herramientas, calendarios y PDF imprimibles están disponibles sin coste alguno.",
+      tag: "100% Gratuito",
     },
   ];
 }

@@ -113,8 +113,8 @@ export default function WeeksYearContent({
                   aria-current={optionYear === year ? "page" : undefined}
                   className={`flex min-h-11 min-w-14 items-center justify-center rounded-lg border px-3 text-sm font-semibold no-underline ${
                     optionYear === year
-                      ? "border-olive-dark bg-olive-dark text-white"
-                      : "border-border bg-card text-ink hover:border-olive-dark"
+                      ? "border-[#1E2B20] bg-[#1E2B20] text-white"
+                      : "border-border bg-card text-ink hover:border-[#1E2B20]"
                   }`}
                 >
                   {optionYear}
@@ -164,7 +164,7 @@ export default function WeeksYearContent({
                         >
                           Semana {row.week}
                           {current && (
-                            <span className="ml-2 rounded-full bg-olive-dark px-2 py-1 text-xs text-white">
+                            <span className="ml-2 rounded-full bg-[#1E2B20] px-2 py-1 text-xs text-white">
                               Actual
                             </span>
                           )}

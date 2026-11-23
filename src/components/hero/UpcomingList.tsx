@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRightIcon } from "@/components/Icons";
 import type { EventItem } from "./NextEvent";
 import { calendarYearHref, hasYearPages } from "@/lib/site";
 import { capitalize } from "@/lib/weeks";
@@ -24,51 +23,51 @@ function untilLabel(days: number): string {
 
 export default function UpcomingList({ events, year }: UpcomingListProps) {
   return (
-    <section
-      aria-labelledby="ns-up"
-      className="flex flex-col gap-1 rounded-3xl border border-border bg-card p-5"
-    >
-      <h2 id="ns-up" className="mb-2 mt-0 text-base font-semibold">
-        Próximos festivos y fechas
-      </h2>
-      {events.length ? (
-        events.map((event) => (
-          <div
-            key={`${event.date.getFullYear()}-${event.date.getMonth()}-${event.date.getDate()}-${event.name}`}
-            className="flex items-center justify-between gap-3 border-t border-cream py-2.5"
-          >
-            <div className="flex min-w-0 flex-col gap-0.5">
-              <span className="text-[15px] font-semibold">{event.name}</span>
-              <span className="text-[13px] text-muted">
-                {displayDate(event.date)}
-              </span>
-            </div>
-            <div className="flex shrink-0 flex-col items-end gap-0.5">
-              <span className="rounded-md bg-mint px-2 py-0.5 text-xs font-bold">
-                Sem. {event.week}
-              </span>
-              <span className="text-xs text-muted">
-                {untilLabel(event.daysUntil)}
-              </span>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p className="border-t border-cream py-3 text-sm text-muted">
-          No hay más fechas destacadas en este periodo.
-        </p>
-      )}
-      {/* The yearly calendar lists every national holiday; it exists for 2020–2035
-          (a ?fecha= outside that range must not produce a broken link). */}
+    <div className="border-t border-[#E9E4D8] pt-5">
+      <h4 className="mb-3 flex items-center justify-between text-sm font-bold uppercase tracking-wider text-stone-600">
+        <span>Próximos festivos y fechas</span>
+        <svg className="h-4 w-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+      </h4>
+      <ul className="space-y-3 text-sm">
+        {events.length ? (
+          events.map((event) => (
+            <li
+              key={`${event.date.getFullYear()}-${event.date.getMonth()}-${event.date.getDate()}-${event.name}`}
+              className="flex items-center justify-between rounded-xl border border-transparent p-2.5 transition hover:border-[#E9E4D8] hover:bg-[#FDFBF7]"
+            >
+              <div>
+                <p className="font-bold text-[#141E16]">{event.name}</p>
+                <p className="text-xs text-stone-500">{displayDate(event.date)}</p>
+              </div>
+              <div className="text-right">
+                <span className="inline-block rounded bg-[#EFECE1] px-2.5 py-1 text-xs font-bold text-[#1E2B20]">
+                  Sem. {event.week}
+                </span>
+                <p className="mt-1 text-xs text-stone-500">
+                  {untilLabel(event.daysUntil)}
+                </p>
+              </div>
+            </li>
+          ))
+        ) : (
+          <li className="py-3 text-sm text-stone-500">
+            No hay más fechas destacadas en este periodo.
+          </li>
+        )}
+      </ul>
       {hasYearPages(year) && (
         <Link
           href={calendarYearHref(year)}
-          className="mt-2 inline-flex min-h-11 items-center self-start pt-2 text-sm font-semibold"
+          className="mt-4 block border-t border-[#E9E4D8]/60 pt-3 text-center text-sm font-semibold text-[#1E2B20] transition hover:text-[#3D5441]"
         >
-          <span>Festivos de {year} en el calendario</span>
-          <ArrowRightIcon className="ml-1 size-4" />
+          Festivos de {year} en el calendario{" "}
+          <svg className="ml-1 inline-block h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </Link>
       )}
-    </section>
+    </div>
   );
 }

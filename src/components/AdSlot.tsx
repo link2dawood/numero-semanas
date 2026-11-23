@@ -27,10 +27,10 @@ export default function AdSlot({
     >
       {process.env.NODE_ENV === "development" && (
         <>
-          <span className="text-[11px] font-semibold uppercase tracking-[0.08em]">
+          <span className="text-xs font-semibold uppercase tracking-[0.08em]">
             {label}
           </span>
-          <span className="text-center text-[13px]">{descriptions[size]}</span>
+          <span className="text-center text-sm">{descriptions[size]}</span>
         </>
       )}
     </aside>

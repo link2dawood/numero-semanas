@@ -5,7 +5,7 @@ import Apps from "@/components/sections/Apps";
 import BrowseYears from "@/components/sections/BrowseYears";
 import Calendar2027 from "@/components/sections/Calendar2027";
 import ChooseCalendar from "@/components/sections/ChooseCalendar";
-import Faq from "@/components/sections/Faq";
+import FaqBlock from "@/components/FaqBlock";
 import ParityAndIso from "@/components/sections/ParityAndIso";
 import ToolsGrid from "@/components/sections/ToolsGrid";
 import WeekHero from "@/components/hero/WeekHero";
@@ -100,25 +100,36 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <>
-      <div className="mx-auto box-border max-w-[1440px] px-4 pt-5 sm:px-5">
-        <AdSlot id="ad-leaderboard" size="leaderboard" />
-      </div>
-      <main className="mx-auto flex max-w-[1440px] flex-col gap-[72px] px-4 pb-0 pt-8 sm:px-5">
-        {/* Rendered directly (no Suspense): the page is dynamic, so the hero and
-            its H1 are part of the initial HTML in document order. */}
+      <main className="mx-auto max-w-7xl space-y-12 px-4 py-8 sm:space-y-16 sm:px-6 lg:px-8">
+        {/* Hero Week Section */}
         <WeekHero today={today} />
+
+        {/* Banner 2027 & Planning Tools */}
         <Calendar2027 />
+
         <AdSlot id="ad-content" size="responsive" />
+
+        {/* Parity and ISO Rules */}
         <ParityAndIso
           week={week}
           nextWeek={nextWeek}
           year={year}
           weeks={weeksInYear(year)}
         />
+
+        {/* Year Selector */}
         <BrowseYears currentYear={year} />
+
+        {/* Apps Section */}
         <Apps />
+
+        {/* All Tools Directory */}
         <ToolsGrid />
-        <Faq faqs={faqs} />
+
+        {/* FAQ Section */}
+        <FaqBlock faqs={faqs} />
+
+        {/* Choose Calendar & International */}
         <ChooseCalendar />
       </main>
       {/* WebSite + Organization, emitted once and only on the home page. */}

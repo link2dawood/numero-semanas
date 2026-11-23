@@ -58,78 +58,109 @@ export default function MiniCalendar({
   }
 
   return (
-    <section
-      aria-labelledby="ns-cal"
-      className="flex flex-col gap-3 rounded-3xl border border-border bg-card p-5"
-    >
-      <div className="flex items-center justify-between gap-2">
+    <div data-purpose="mini-calendar">
+      <div className="mb-4 flex items-center justify-between">
         <button
           type="button"
           onClick={() => changeMonth(-1)}
           aria-label="Mes anterior"
-          className="flex size-11 shrink-0 items-center justify-center rounded-[10px] border border-border bg-card text-xl hover:bg-panel"
+          className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E9E4D8] text-xs text-stone-600 hover:bg-[#F7F5EE]"
         >
-          <span aria-hidden="true">‹</span>
+          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
         </button>
-        <h2 id="ns-cal" className="m-0 text-center text-base font-semibold">
+        <h3 id="ns-cal" className="text-sm font-bold tracking-tight text-[#141E16]">
           {capitalize(monthTitle)}
-        </h2>
+        </h3>
         <button
           type="button"
           onClick={() => changeMonth(1)}
           aria-label="Mes siguiente"
-          className="flex size-11 shrink-0 items-center justify-center rounded-[10px] border border-border bg-card text-xl hover:bg-panel"
+          className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E9E4D8] text-xs text-stone-600 hover:bg-[#F7F5EE]"
         >
-          <span aria-hidden="true">›</span>
+          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </button>
       </div>
-      <div className="grid grid-cols-8 gap-0.5 text-center text-xs font-semibold text-muted">
-        <span className="text-olive-dark">Sem</span>
-        {weekDays.map((day) => <span key={day}>{day}</span>)}
+
+      {/* Calendar Table */}
+      <div className="w-full text-center text-sm">
+        {/* Headers: Sem + Days of week */}
+        <div className="grid grid-cols-8 gap-1 border-b border-[#E9E4D8] pb-2 text-xs font-semibold text-stone-500">
+          <span className="font-bold text-[#2A3C2D]">Sem</span>
+          {weekDays.map((day) => (
+            <span key={day}>{day}</span>
+          ))}
+        </div>
+
+        {/* Calendar Rows */}
+        <div className="space-y-1 pt-2 font-medium">
+          {rows.map((row) => {
+            const week = isoWeek(row[0]).week;
+            const selectedWeek = isSameDay(mondayOf(row[0]), mondayOf(selected));
+
+            return (
+              <div
+                key={dateToIso(row[0])}
+                className={`grid grid-cols-8 items-center gap-1 py-0.5 ${
+                  selectedWeek ? "rounded-lg bg-[#F7F5EE]/70 p-0.5 font-bold" : ""
+                }`}
+              >
+                <span
+                  className={`rounded py-1 text-xs font-bold ${
+                    selectedWeek
+                      ? "bg-[#1E2B20] text-white"
+                      : "bg-[#F7F5EE] text-stone-400"
+                  }`}
+                >
+                  {week}
+                </span>
+                {row.map((date) => {
+                  const inMonth = date.getMonth() === selected.getMonth();
+                  const isSelected = isSameDay(date, selected);
+                  const isToday = isSameDay(date, today);
+                  const isSunday = date.getDay() === 0;
+
+                  return (
+                    <button
+                      key={date.getDate() + "-" + date.getMonth()}
+                      type="button"
+                      onClick={() => onSelect(date)}
+                      aria-label={`${capitalize(
+                        new Intl.DateTimeFormat("es-ES", {
+                          weekday: "long",
+                        }).format(date),
+                      )}, ${formatLong(date)}, semana ${week}`}
+                      aria-pressed={isSelected}
+                      className={`relative mx-auto flex h-6 w-6 items-center justify-center rounded-full text-xs transition ${
+                        isSelected
+                          ? "bg-[#1E2B20] font-bold text-white shadow-sm"
+                          : isToday
+                            ? "ring-2 ring-[#687252] ring-offset-1"
+                            : ""
+                      } ${
+                        !isSelected && inMonth
+                          ? selectedWeek
+                            ? "text-[#141E16]"
+                            : isSunday
+                              ? "text-stone-400"
+                              : "text-stone-700"
+                          : !isSelected
+                            ? "text-stone-300"
+                            : ""
+                      } hover:bg-[#EEF0E6]`}
+                    >
+                      {date.getDate()}
+                    </button>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="flex flex-col gap-0.5">
-        {rows.map((row) => {
-          const week = isoWeek(row[0]).week;
-          const selectedWeek = isSameDay(mondayOf(row[0]), mondayOf(selected));
-          return (
-            <div
-              key={dateToIso(row[0])}
-              className={`grid grid-cols-8 gap-0.5 rounded-[10px] ${selectedWeek ? "bg-panel" : ""}`}
-            >
-              <span className="flex items-center justify-center text-[13px] font-bold text-olive-dark">
-                {week}
-              </span>
-              {row.map((date) => {
-                const inMonth = date.getMonth() === selected.getMonth();
-                const isSelected = isSameDay(date, selected);
-                const isToday = isSameDay(date, today);
-                return (
-                  <button
-                    key={date.getDate() + "-" + date.getMonth()}
-                    type="button"
-                    onClick={() => onSelect(date)}
-                    aria-label={`${capitalize(
-                      new Intl.DateTimeFormat("es-ES", {
-                        weekday: "long",
-                      }).format(date),
-                    )}, ${formatLong(date)}, semana ${week}`}
-                    aria-pressed={isSelected}
-                    className={`relative h-10 min-w-0 rounded-[10px] text-sm hover:bg-mint ${
-                      isSelected
-                        ? "bg-olive-dark font-bold text-white hover:bg-olive-dark"
-                        : inMonth
-                          ? "bg-transparent text-ink"
-                          : "bg-transparent text-muted"
-                    } ${isToday && !isSelected ? "after:absolute after:inset-1 after:rounded-lg after:border-2 after:border-olive" : ""}`}
-                  >
-                    {date.getDate()}
-                  </button>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-    </section>
+    </div>
   );
 }

@@ -110,7 +110,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="min-h-11 self-start rounded-full bg-olive-dark px-5 font-semibold text-white hover:bg-olive disabled:opacity-60"
+        className="min-h-11 self-start rounded-full bg-[#1E2B20] px-5 font-semibold text-white hover:bg-[#2A3C2D] disabled:opacity-60"
       >
         {status === "sending" ? "Enviando…" : "Enviar mensaje"}
       </button>

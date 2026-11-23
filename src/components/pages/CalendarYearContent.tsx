@@ -3,6 +3,7 @@ import AdSlot from "@/components/AdSlot";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqBlock from "@/components/FaqBlock";
 import PageHero from "@/components/PageHero";
+import CalendarYear2027Hero from "@/components/CalendarYear2027Hero";
 import RelatedLinks from "@/components/RelatedLinks";
 import CalendarYearView from "./CalendarYearView";
 import { DEFAULT_OG_IMAGE, calendarYearHref, hasYearPages, weeksYearHref } from "@/lib/site";
@@ -45,20 +46,24 @@ export default function CalendarYearContent({
         ]}
       />
       <div className="mx-auto max-w-[1200px] px-4 pt-5 sm:px-5">
-        <PageHero
-          eyebrow="Calendario anual"
-          title={`Calendario ${year} con semanas ISO`}
-          intro={`Consulta los doce meses de ${year}, con números de semana ISO y festivos nacionales de España. Puedes seleccionar una comunidad autónoma para ver su fecha autonómica destacada.`}
-          widget={
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-xl bg-panel px-4 py-3 text-sm">
-                <strong className="block text-lg">{weeksInYear(year)}</strong>
-                semanas ISO
-              </span>
-              {actions}
-            </div>
-          }
-        />
+        {year === 2027 ? (
+          <CalendarYear2027Hero year={year} />
+        ) : (
+          <PageHero
+            eyebrow="Calendario anual"
+            title={`Calendario ${year} con semanas ISO`}
+            intro={`Consulta los doce meses de ${year}, con números de semana ISO y festivos nacionales de España. Puedes seleccionar una comunidad autónoma para ver su fecha autonómica destacada.`}
+            widget={
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-xl bg-panel px-4 py-3 text-sm">
+                  <strong className="block text-lg">{weeksInYear(year)}</strong>
+                  semanas ISO
+                </span>
+                {actions}
+              </div>
+            }
+          />
+        )}
       </div>
       <div className="mx-auto max-w-[1440px] px-4 pt-5 sm:px-5">
         <AdSlot id={`ad-calendar-${year}`} size="leaderboard" />

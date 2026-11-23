@@ -39,7 +39,7 @@ export default function NotFound() {
         </ul>
         <Link
           href="/"
-          className="mt-6 inline-flex min-h-11 items-center rounded-full bg-olive-dark px-5 font-semibold text-white no-underline"
+          className="mt-6 inline-flex min-h-11 items-center rounded-full bg-[#1E2B20] px-5 font-semibold text-white no-underline hover:bg-[#2A3C2D]"
         >
           Ver semana actual
         </Link>

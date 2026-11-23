@@ -78,7 +78,7 @@ export default function WidgetGenerator() {
         <button
           type="button"
           onClick={copyCode}
-          className="min-h-11 self-start rounded-full bg-olive-dark px-5 font-semibold text-white"
+          className="min-h-11 self-start rounded-full bg-[#1E2B20] px-5 font-semibold text-white hover:bg-[#2A3C2D]"
         >
           {copied ? "Código copiado" : "Copiar código"}
         </button>

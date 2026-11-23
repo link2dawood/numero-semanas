@@ -11,7 +11,7 @@ type NextEventProps = { event: EventItem | null };
 
 function eventDateLabel(date: Date): string {
   return `${capitalize(
-    new Intl.DateTimeFormat("es-ES", { weekday: "short" }).format(date),
+    new Intl.DateTimeFormat("es-ES", { weekday: "long" }).format(date),
   )} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
@@ -32,25 +32,28 @@ export default function NextEvent({ event }: NextEventProps) {
   return (
     <section
       aria-labelledby="ns-next"
-      className="flex flex-col gap-2 rounded-3xl bg-olive-dark p-6 text-white"
+      className="relative overflow-hidden rounded-3xl bg-[#1E2B20] p-6 text-white shadow-[0_8px_30px_-4px_rgba(30,43,32,0.07)] sm:p-7"
     >
+      <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-[#EEF0E6]">
+        <span>Próximo evento</span>
+        <span className="rounded-full border border-[#3D5441]/50 bg-[#2A3C2D]/60 px-2.5 py-0.5">
+          Sem. {event.week}
+        </span>
+      </div>
       <h2
         id="ns-next"
-        className="m-0 text-[13px] font-semibold uppercase tracking-wide text-mint"
+        className="mb-1 font-serif text-2xl font-bold text-white"
       >
-        Próximo evento
-      </h2>
-      <p className="m-0 font-heading text-[28px] font-bold leading-tight">
         {event.name}
+      </h2>
+      <p className="mb-4 text-xs font-medium text-stone-300">
+        {eventDateLabel(event.date)}
       </p>
-      <p className="m-0 text-[15px] text-cream">
-        {eventDateLabel(event.date)} · Sem. {event.week}
-      </p>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className="font-heading text-[44px] font-bold leading-none text-tan">
+      <div className="flex items-baseline gap-2 border-t border-[#2A3C2D]/80 pt-2">
+        <span className="font-serif text-4xl font-bold text-amber-300">
           {countdown}
         </span>
-        <span className="text-[15px] text-cream">{unit}</span>
+        <span className="text-sm font-medium text-stone-300">{unit}</span>
       </div>
     </section>
   );

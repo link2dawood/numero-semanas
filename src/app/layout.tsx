@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -6,6 +7,21 @@ import SiteChrome from "@/components/SiteChrome";
 import { SITE_URL } from "@/lib/site";
 import { isoWeek, parseIsoDate } from "@/lib/weeks";
 import "./globals.css";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -38,8 +54,8 @@ export default function RootLayout({
   const year = today.getFullYear();
 
   return (
-    <html lang="es-ES" translate="no" suppressHydrationWarning>
-      <body className="antialiased">
+    <html lang="es-ES" translate="no" suppressHydrationWarning className={`${playfair.variable} ${plusJakarta.variable} scroll-smooth`}>
+      <body className="min-h-screen antialiased">
         <SiteChrome>
           <Header week={week} weekYear={weekYear} />
         </SiteChrome>

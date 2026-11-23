@@ -46,7 +46,7 @@ function LiveInfo({ slug, today }: { slug: string; today: Date }) {
   }
 
   return (
-    <div className="rounded-2xl bg-olive-dark px-5 py-4 text-white">
+    <div className="rounded-2xl bg-[#1E2B20] px-5 py-4 text-white">
       <p className="m-0 text-sm font-semibold text-mint">{title}</p>
       <p className="mb-0 mt-1 font-heading text-2xl font-bold">{value}</p>
       <p className="mb-0 mt-1 text-sm text-cream">{caption}</p>
@@ -149,7 +149,7 @@ function PageExtras({
             href={storeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-11 w-fit items-center rounded-full bg-olive-dark px-5 font-semibold text-white"
+            className="flex min-h-11 w-fit items-center rounded-full bg-[#1E2B20] px-5 font-semibold text-white hover:bg-[#2A3C2D]"
           >
             {android ? "Abrir Google Play" : "Abrir Chrome Web Store"}
           </a>
@@ -192,7 +192,7 @@ function PageExtras({
           : { label: "Consultar el calendario laboral publicado en el BOE", href: "https://www.boe.es/" };
     return (
       <>
-        <section className="rounded-2xl bg-olive-dark p-5 text-white">
+        <section className="rounded-2xl bg-[#1E2B20] p-5 text-white">
           <p className="m-0 text-sm text-mint">Próxima fecha de referencia</p>
           <p className="mb-0 mt-1 font-heading text-2xl font-bold">
             {formatLong(nextDate)}
@@ -248,7 +248,7 @@ function PageExtras({
     const countdown = Math.max(0, calendarDayDifference(today, nextChange.date));
     return (
       <section className="flex flex-col gap-4">
-        <div className="rounded-2xl bg-olive-dark p-5 text-white">
+        <div className="rounded-2xl bg-[#1E2B20] p-5 text-white">
           <p className="m-0 text-sm text-mint">Próximo cambio: {nextChange.name}</p>
           <p className="mb-0 mt-1 font-heading text-2xl font-bold">{formatLong(nextChange.date)}</p>
           <p className="mb-0 mt-1">Faltan {countdown} días · de {nextChange.before} a {nextChange.after} (hora peninsular)</p>
@@ -344,7 +344,7 @@ function PageExtras({
     });
     return (
       <>
-        <section className="rounded-2xl bg-olive-dark p-5 text-white">
+        <section className="rounded-2xl bg-[#1E2B20] p-5 text-white">
           <p className="m-0 text-sm text-mint">{city.name} · hoy, {formatLong(today)}</p>
           {currentSun ? (
             <div className="mt-2 grid gap-3 sm:grid-cols-2">
@@ -408,7 +408,7 @@ function PageExtras({
         <p className="leading-relaxed text-muted">Descarga las semanas ISO y festivos nacionales de 2026 como un archivo .ics.</p>
         <a
           href="/api/ics/festivos-2026.ics"
-          className="inline-flex min-h-11 items-center rounded-full bg-olive-dark px-5 font-semibold text-white"
+          className="inline-flex min-h-11 items-center rounded-full bg-[#1E2B20] px-5 font-semibold text-white hover:bg-[#2A3C2D]"
         >
           Descargar calendario 2026
         </a>
