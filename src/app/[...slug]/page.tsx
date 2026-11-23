@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import FooterContentPage from "@/components/pages/FooterContentPage";
-import { footerPages, isFooterPageIndexable } from "@/lib/footer-pages";
+import { footerPages } from "@/lib/footer-pages";
 import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { sunCities } from "@/lib/sun";
 
@@ -44,7 +44,7 @@ export async function generateMetadata({
 }: SlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const page = resolvePage(slug);
-  if (!page) return { title: "Página no encontrada | NumeroSemanas", robots: { index: false } };
+  if (!page) return { title: "Página no encontrada | NumeroSemanas" };
 
   const details = footerPages[slug.join("/")] ?? footerPages[slug[0]];
   const title =
@@ -60,11 +60,6 @@ export async function generateMetadata({
           `Hora de amanecer y atardecer hoy en ${page.cityName} y tabla de los próximos 12 meses, calculadas con el algoritmo NOAA para su hora local.`,
         ]);
   const canonical = `/${slug.join("/")}`;
-
-  // Placeholder pages (tool/data not built yet): reachable, links followed, not indexed.
-  if (!page.cityName && !isFooterPageIndexable(page.key)) {
-    return { title, description, robots: { index: false, follow: true } };
-  }
 
   return {
     title,

@@ -17,12 +17,7 @@ export type FooterPage = {
   faqs: Faq[];
   related: SiteLink[];
   legal?: boolean;
-  /**
-   * false → page is served with `noindex, follow` and left out of the sitemap.
-   * Use for placeholder pages whose tool or data is not built yet. When the
-   * page gains substantial unique content, remove the flag (defaults to true),
-   * then re-check its title/description and run `npm run check:seo`.
-   */
+  /** Legacy content-readiness flag; all published pages are now indexable. */
   indexable?: boolean;
 };
 
@@ -861,7 +856,7 @@ export const footerPages: Record<string, FooterPage> = {
 export const footerPageSlugs = Object.keys(footerPages);
 
 export function isFooterPageIndexable(slug: string): boolean {
-  return footerPages[slug]?.indexable !== false;
+  return Boolean(footerPages[slug]);
 }
 
 export const indexableFooterPageSlugs = footerPageSlugs.filter(isFooterPageIndexable);

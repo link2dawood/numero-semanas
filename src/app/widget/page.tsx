@@ -6,7 +6,7 @@ import { WeekWidget } from "@/components/pages/FooterContentPage";
 export const metadata: Metadata = {
   title: "Widget de semana ISO | NumeroSemanas",
   description: "Widget compacto con el número de semana ISO actual.",
-  robots: { index: false, follow: false },
+  alternates: { canonical: "/widget" },
 };
 
 type WidgetPageProps = {

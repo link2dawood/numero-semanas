@@ -13,14 +13,12 @@ export async function generateMetadata({
     return {
       title: "Semana no encontrada | NumeroSemanas",
       description: "La semana solicitada no existe.",
-      robots: { index: false, follow: false },
     };
   }
   return {
     title: `Semana ${week}: consultar fechas | NumeroSemanas`,
     description: `Consulta la semana ISO ${week}, elige un año y comprueba sus fechas de lunes a domingo.`,
-    // Intentionally noindex (thin helper page), so no canonical is declared.
-    robots: { index: false, follow: true },
+    alternates: { canonical: `/semana/${week}` },
   };
 }
 

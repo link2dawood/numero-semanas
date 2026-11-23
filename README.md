@@ -58,14 +58,6 @@ vercel --prod
 
 Configure values under **Vercel Project → Settings → Environment Variables**. Environment changes apply only to new deployments, so redeploy afterward.
 
-### Required for production launch
-
-| Variable | Production | Preview | Purpose |
-|---|---|---|---|
-| `SITE_INDEXING` | `enabled` | Leave empty | Production allows crawling; every other environment remains `noindex` by default |
-
-Do not set `SITE_INDEXING=enabled` for Preview deployments. Preview pages use production canonicals but remain blocked from search indexing.
-
 ### Recommended for protected previews
 
 | Variable | Production | Preview | Purpose |
@@ -96,7 +88,7 @@ GA4 and Clarity load only after analytics consent. Variables prefixed with `NEXT
 
 ## Domain and SEO launch checklist
 
-After the custom domain is connected and the production deployment has `SITE_INDEXING=enabled`, verify:
+After the custom domain is connected, verify:
 
 ```text
 https://numerosemanas.es/
@@ -111,7 +103,7 @@ Expected behavior:
 - `robots.txt` contains `Allow: /` and the production sitemap URL.
 - The sitemap contains canonical `https://numerosemanas.es/...` URLs.
 - `www` redirects to `https://numerosemanas.es` in one permanent hop.
-- Preview deployments remain `noindex`.
+- Preview deployments that should not be public are protected with `STAGING_BASIC_AUTH`.
 
 Then add `https://numerosemanas.es/sitemap.xml` in Google Search Console and test the homepage, one week-list page, one calendar page, and one city page with URL Inspection.
 

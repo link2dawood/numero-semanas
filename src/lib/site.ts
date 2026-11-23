@@ -28,12 +28,3 @@ export function weeksYearHref(year: number): string {
 export function calendarYearHref(year: number): string {
   return year === 2027 ? "/calendario-2027" : `/calendario/${year}`;
 }
-
-/**
- * Search-engine indexing is opt-in. Every environment (local, preview,
- * staging) stays out of search results unless SITE_INDEXING=enabled is set
- * at runtime. Set it only on the public production deployment at launch.
- */
-export function isIndexingEnabled(): boolean {
-  return process.env.SITE_INDEXING === "enabled";
-}

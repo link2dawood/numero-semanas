@@ -60,14 +60,12 @@ export async function generateMetadata({
     typeof query.fecha === "string" ? query.fecha : null,
   ) ?? today;
   const { week, year } = isoWeek(selectedDate);
-  // Every ?fecha= value would otherwise be its own indexable near-duplicate of
-  // the home page (unbounded URL space). Keep those out of the index but let
-  // crawlers follow their links; the home page itself stays canonical.
+  // Date variants share the home page canonical to avoid duplicate URLs.
   if (!isSameDay(selectedDate, today)) {
     return {
       title: `Semana ${week} de ${year} – ${formatLong(selectedDate)} | NumeroSemanas`,
       description: `El ${formatLong(selectedDate)} corresponde a la semana ${week} de ${year} según la norma ISO 8601.`,
-      robots: { index: false, follow: true },
+      alternates: { canonical: "/" },
     };
   }
   const canonical = "/";

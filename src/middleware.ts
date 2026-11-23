@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { consolidatedRedirects, yearAliasRedirects } from "@/lib/redirects";
 
-const NOINDEX = "noindex, nofollow";
 const CONSOLIDATED = new Map(consolidatedRedirects.map(({ source, destination }) => [source, destination]));
 const YEAR_ALIASES = new Map(yearAliasRedirects.map(({ source, destination }) => [source, destination]));
 
@@ -11,8 +10,7 @@ const YEAR_ALIASES = new Map(yearAliasRedirects.map(({ source, destination }) =>
  *   Combinations resolve in the same hop.
  * - STAGING_BASIC_AUTH="user:password" puts the whole site behind HTTP Basic
  *   Auth (recommended for any publicly reachable staging/preview host).
- * - Unless SITE_INDEXING=enabled, every response carries X-Robots-Tag: noindex.
- * Both are read at request time, so launch only needs an env change + restart.
+ * Authentication is read at request time.
  */
 export function middleware(request: NextRequest) {
   const normalized = normalizedUrl(request);
@@ -24,17 +22,12 @@ export function middleware(request: NextRequest) {
       status: 401,
       headers: {
         "WWW-Authenticate": 'Basic realm="NumeroSemanas (staging)", charset="UTF-8"',
-        "X-Robots-Tag": NOINDEX,
         "Cache-Control": "no-store",
       },
     });
   }
 
-  const response = NextResponse.next();
-  if (process.env.SITE_INDEXING !== "enabled") {
-    response.headers.set("X-Robots-Tag", NOINDEX);
-  }
-  return response;
+  return NextResponse.next();
 }
 
 function normalizedUrl(request: NextRequest): NextResponse | null {
