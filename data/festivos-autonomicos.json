@@ -1,24 +1,290 @@
 {
-  "source": "Calendarios laborales publicados por las comunidades autónomas en el BOE; verificar posibles traslados por coincidencia con domingo.",
+  "source": "Calendarios laborales publicados en el BOE. 2026: BOE-A-2025-21667; 2027: BOE-A-2026-21254",
+  "lastUpdated": "2026-11-24",
   "communities": [
-    { "name": "Andalucía", "slug": "andalucia", "dates": { "2026": ["2026-02-28"], "2027": ["2027-02-28"] } },
-    { "name": "Aragón", "slug": "aragon", "dates": { "2026": ["2026-04-23"], "2027": ["2027-04-23"] } },
-    { "name": "Asturias", "slug": "asturias", "dates": { "2026": ["2026-09-08"], "2027": ["2027-09-08"] } },
-    { "name": "Illes Balears", "slug": "illes-balears", "dates": { "2026": ["2026-03-01"], "2027": ["2027-03-01"] } },
-    { "name": "Canarias", "slug": "canarias", "dates": { "2026": ["2026-05-30"], "2027": ["2027-05-30"] } },
-    { "name": "Cantabria", "slug": "cantabria", "dates": { "2026": ["2026-07-28"], "2027": ["2027-07-28"] } },
-    { "name": "Castilla-La Mancha", "slug": "castilla-la-mancha", "dates": { "2026": ["2026-05-31"], "2027": ["2027-05-31"] } },
-    { "name": "Castilla y León", "slug": "castilla-y-leon", "dates": { "2026": ["2026-04-23"], "2027": ["2027-04-23"] } },
-    { "name": "Cataluña", "slug": "cataluna", "dates": { "2026": ["2026-09-11"], "2027": ["2027-09-11"] } },
-    { "name": "Comunitat Valenciana", "slug": "comunitat-valenciana", "dates": { "2026": ["2026-10-09"], "2027": ["2027-10-09"] } },
-    { "name": "Extremadura", "slug": "extremadura", "dates": { "2026": ["2026-09-08"], "2027": ["2027-09-08"] } },
-    { "name": "Galicia", "slug": "galicia", "dates": { "2026": ["2026-07-25"], "2027": ["2027-07-25"] } },
-    { "name": "Comunidad de Madrid", "slug": "comunidad-de-madrid", "dates": { "2026": ["2026-05-02"], "2027": ["2027-05-02"] } },
-    { "name": "Región de Murcia", "slug": "region-de-murcia", "dates": { "2026": ["2026-06-09"], "2027": ["2027-06-09"] } },
-    { "name": "Navarra", "slug": "navarra", "dates": { "2026": ["2026-12-03"], "2027": ["2027-12-03"] } },
-    { "name": "País Vasco", "slug": "pais-vasco", "dates": { "2026": ["2026-10-25"], "2027": ["2027-10-25"] } },
-    { "name": "La Rioja", "slug": "la-rioja", "dates": { "2026": ["2026-06-09"], "2027": ["2027-06-09"] } },
-    { "name": "Ceuta", "slug": "ceuta", "dates": { "2026": ["2026-09-02"], "2027": ["2027-09-02"] } },
-    { "name": "Melilla", "slug": "melilla", "dates": { "2026": ["2026-09-17"], "2027": ["2027-09-17"] } }
+    {
+      "name": "Andalucía",
+      "slug": "andalucia",
+      "holidays": {
+        "2026": [
+          { "date": "2026-02-28", "name": "Día de Andalucía" }
+        ],
+        "2027": [
+          { "date": "2027-02-28", "name": "Día de Andalucía", "type": "observance", "note": "Cae en domingo" },
+          { "date": "2027-03-01", "name": "Lunes siguiente al Día de Andalucía", "type": "day_off" }
+        ]
+      }
+    },
+    {
+      "name": "Aragón",
+      "slug": "aragon",
+      "holidays": {
+        "2026": [
+          { "date": "2026-04-23", "name": "San Jorge / Día de Aragón" }
+        ],
+        "2027": [
+          { "date": "2027-04-23", "name": "San Jorge / Día de Aragón" }
+        ]
+      }
+    },
+    {
+      "name": "Asturias",
+      "slug": "asturias",
+      "holidays": {
+        "2026": [
+          { "date": "2026-09-08", "name": "Día de Asturias" }
+        ],
+        "2027": [
+          { "date": "2027-09-08", "name": "Día de Asturias" }
+        ]
+      }
+    },
+    {
+      "name": "Illes Balears",
+      "slug": "illes-balears",
+      "holidays": {
+        "2026": [
+          { "date": "2026-03-01", "name": "Día de les Illes Balears", "type": "observance", "note": "Cae en domingo" },
+          { "date": "2026-03-02", "name": "Lunes siguiente al Día de les Illes Balears", "type": "day_off" },
+          { "date": "2026-04-06", "name": "Lunes de Pascua" },
+          { "date": "2026-12-26", "name": "San Esteban" }
+        ],
+        "2027": [
+          { "date": "2027-03-01", "name": "Día de les Illes Balears" },
+          { "date": "2027-03-29", "name": "Lunes de Pascua" },
+          { "date": "2027-12-26", "name": "San Esteban" }
+        ]
+      }
+    },
+    {
+      "name": "Canarias",
+      "slug": "canarias",
+      "holidays": {
+        "2026": [
+          { "date": "2026-05-30", "name": "Día de Canarias" }
+        ],
+        "2027": [
+          { "date": "2027-05-30", "name": "Día de Canarias" }
+        ]
+      },
+      "islands": {
+        "2026": {
+          "el-hierro": { "date": "2026-09-24", "name": "Nuestra Señora de los Reyes" },
+          "fuerteventura": { "date": "2026-09-18", "name": "Nuestra Señora de la Peña" },
+          "gran-canaria": { "date": "2026-09-08", "name": "Nuestra Señora del Pino" },
+          "la-gomera": { "date": "2026-10-05", "name": "Nuestra Señora de Guadalupe" },
+          "la-palma": { "date": "2026-08-05", "name": "Nuestra Señora de Las Nieves" },
+          "lanzarote": { "date": "2026-09-15", "name": "Nuestra Señora de los Volcanes" },
+          "tenerife": { "date": "2026-02-02", "name": "Virgen de la Candelaria" }
+        },
+        "2027": {
+          "el-hierro": { "date": "2027-09-24", "name": "Nuestra Señora de los Reyes" },
+          "fuerteventura": { "date": "2027-09-17", "name": "Nuestra Señora de la Peña" },
+          "gran-canaria": { "date": "2027-09-08", "name": "Nuestra Señora del Pino" },
+          "la-gomera": { "date": "2027-10-04", "name": "Nuestra Señora de Guadalupe" },
+          "la-palma": { "date": "2027-08-05", "name": "Nuestra Señora de Las Nieves" },
+          "lanzarote": { "date": "2027-09-15", "name": "Nuestra Señora de los Volcanes" },
+          "tenerife": { "date": "2027-02-02", "name": "Virgen de la Candelaria" }
+        }
+      }
+    },
+    {
+      "name": "Cantabria",
+      "slug": "cantabria",
+      "holidays": {
+        "2026": [
+          { "date": "2026-07-28", "name": "Día de las Instituciones de Cantabria" }
+        ],
+        "2027": [
+          { "date": "2027-07-28", "name": "Día de las Instituciones de Cantabria" },
+          { "date": "2027-09-15", "name": "La Bien Aparecida" }
+        ]
+      }
+    },
+    {
+      "name": "Castilla-La Mancha",
+      "slug": "castilla-la-mancha",
+      "holidays": {
+        "2026": [
+          { "date": "2026-05-31", "name": "Día de Castilla-La Mancha" },
+          { "date": "2026-06-04", "name": "Corpus Christi" }
+        ],
+        "2027": [
+          { "date": "2027-05-27", "name": "Corpus Christi" },
+          { "date": "2027-05-31", "name": "Día de Castilla-La Mancha" }
+        ]
+      }
+    },
+    {
+      "name": "Castilla y León",
+      "slug": "castilla-y-leon",
+      "holidays": {
+        "2026": [
+          { "date": "2026-04-23", "name": "Fiesta de Castilla y León" }
+        ],
+        "2027": [
+          { "date": "2027-04-23", "name": "Fiesta de Castilla y León" }
+        ]
+      }
+    },
+    {
+      "name": "Cataluña",
+      "slug": "cataluna",
+      "holidays": {
+        "2026": [
+          { "date": "2026-04-06", "name": "Lunes de Pascua" },
+          { "date": "2026-06-24", "name": "San Juan" },
+          { "date": "2026-09-11", "name": "Fiesta Nacional de Cataluña" },
+          { "date": "2026-12-26", "name": "Sant Esteve" }
+        ],
+        "2027": [
+          { "date": "2027-03-29", "name": "Lunes de Pascua" },
+          { "date": "2027-06-24", "name": "San Juan" },
+          { "date": "2027-09-11", "name": "Fiesta Nacional de Cataluña" },
+          { "date": "2027-12-26", "name": "Sant Esteve" }
+        ]
+      },
+      "note": "Cataluña no observa Jueves Santo como festivo"
+    },
+    {
+      "name": "Comunitat Valenciana",
+      "slug": "comunitat-valenciana",
+      "holidays": {
+        "2026": [
+          { "date": "2026-03-19", "name": "San José" },
+          { "date": "2026-10-09", "name": "Día de la Comunitat Valenciana" }
+        ],
+        "2027": [
+          { "date": "2027-03-19", "name": "San José" },
+          { "date": "2027-10-09", "name": "Día de la Comunitat Valenciana" },
+          { "date": "2027-10-11", "name": "Sustitución del 15 de agosto" }
+        ]
+      }
+    },
+    {
+      "name": "Extremadura",
+      "slug": "extremadura",
+      "holidays": {
+        "2026": [
+          { "date": "2026-09-08", "name": "Día de Extremadura" }
+        ],
+        "2027": [
+          { "date": "2027-09-08", "name": "Día de Extremadura" }
+        ]
+      }
+    },
+    {
+      "name": "Galicia",
+      "slug": "galicia",
+      "holidays": {
+        "2026": [
+          { "date": "2026-05-17", "name": "Día de las Letras Gallegas" },
+          { "date": "2026-07-25", "name": "Santiago Apóstol / Día Nacional de Galicia" }
+        ],
+        "2027": [
+          { "date": "2027-05-17", "name": "Día de las Letras Gallegas" },
+          { "date": "2027-07-25", "name": "Santiago Apóstol / Día Nacional de Galicia" }
+        ]
+      }
+    },
+    {
+      "name": "Comunidad de Madrid",
+      "slug": "comunidad-de-madrid",
+      "holidays": {
+        "2026": [
+          { "date": "2026-05-02", "name": "Fiesta de la Comunidad de Madrid" }
+        ],
+        "2027": [
+          { "date": "2027-05-02", "name": "Fiesta de la Comunidad de Madrid" }
+        ]
+      }
+    },
+    {
+      "name": "Región de Murcia",
+      "slug": "region-de-murcia",
+      "holidays": {
+        "2026": [
+          { "date": "2026-06-09", "name": "Día de la Región de Murcia" }
+        ],
+        "2027": [
+          { "date": "2027-06-09", "name": "Día de la Región de Murcia" }
+        ]
+      }
+    },
+    {
+      "name": "Navarra",
+      "slug": "navarra",
+      "holidays": {
+        "2026": [
+          { "date": "2026-03-19", "name": "San José" },
+          { "date": "2026-12-03", "name": "San Francisco Javier" }
+        ],
+        "2027": [
+          { "date": "2027-03-19", "name": "San José" },
+          { "date": "2027-10-11", "name": "Sustitución del 15 de agosto", "note": "El 15 de agosto cae en domingo" },
+          { "date": "2027-12-03", "name": "San Francisco Javier" }
+        ]
+      }
+    },
+    {
+      "name": "País Vasco",
+      "slug": "pais-vasco",
+      "holidays": {
+        "2026": [
+          { "date": "2026-03-19", "name": "San José" },
+          { "date": "2026-10-25", "name": "Día del País Vasco / Euskadi Eguna" }
+        ],
+        "2027": [
+          { "date": "2027-03-19", "name": "San José" },
+          { "date": "2027-10-07", "name": "Aniversario 1er Gobierno Euskadi" }
+        ]
+      }
+    },
+    {
+      "name": "La Rioja",
+      "slug": "la-rioja",
+      "holidays": {
+        "2026": [
+          { "date": "2026-06-09", "name": "Día de La Rioja" }
+        ],
+        "2027": [
+          { "date": "2027-06-09", "name": "Día de La Rioja" }
+        ]
+      }
+    },
+    {
+      "name": "Ceuta",
+      "slug": "ceuta",
+      "holidays": {
+        "2026": [
+          { "date": "2026-03-20", "name": "Fiesta del Eid al-Fitr" },
+          { "date": "2026-05-27", "name": "Fiesta del Eid al-Adha" },
+          { "date": "2026-09-02", "name": "Día de Ceuta" }
+        ],
+        "2027": [
+          { "date": "2027-03-10", "name": "Fiesta del Eid al-Fitr" },
+          { "date": "2027-05-17", "name": "Fiesta del Eid al-Adha" },
+          { "date": "2027-08-05", "name": "Nuestra Señora de África" },
+          { "date": "2027-09-02", "name": "Día de Ceuta" }
+        ]
+      },
+      "note": "Ceuta no observa Jueves Santo como festivo"
+    },
+    {
+      "name": "Melilla",
+      "slug": "melilla",
+      "holidays": {
+        "2026": [
+          { "date": "2026-03-20", "name": "Fiesta del Eid al-Fitr" },
+          { "date": "2026-05-27", "name": "Fiesta del Eid al-Adha" },
+          { "date": "2026-09-17", "name": "Día de Melilla" }
+        ],
+        "2027": [
+          { "date": "2027-03-10", "name": "Fiesta del Eid al-Fitr" },
+          { "date": "2027-05-17", "name": "Fiesta del Eid al-Adha" },
+          { "date": "2027-09-17", "name": "Día de Melilla" }
+        ]
+      }
+    }
   ]
 }

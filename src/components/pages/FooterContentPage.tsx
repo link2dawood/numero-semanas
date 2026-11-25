@@ -17,8 +17,16 @@ import {
   formatLong,
   isEven,
   isoWeek,
+  parseIsoDate,
   weeksInYear,
 } from "@/lib/weeks";
+import {
+  nationalHolidaysForYear,
+  holidaysForYearAndTerritory,
+  TERRITORIES,
+  getSource,
+  type TerritorySlug,
+} from "@/lib/holidays";
 import { paymentDatesForYear } from "@/lib/payments";
 import { moonPhasesForYear } from "@/lib/moon";
 import { formatSunTime, nearbySunCities, sunCities, sunTimesForDate } from "@/lib/sun";
@@ -436,6 +444,170 @@ function PageExtras({
           ))}
         </ul>
       </section>
+    );
+  }
+
+  // Festivos pages with actual holiday data from BOE
+  if (slug === "festivos-2026" || slug === "festivos-2027") {
+    const year = slug === "festivos-2026" ? 2026 : 2027;
+    const boeSource = getSource(year);
+    const boeUrl = year === 2026
+      ? "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-21667"
+      : "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21254";
+
+    // Get national holidays
+    const nationalHolidays = nationalHolidaysForYear(year);
+    const daysOff = nationalHolidays.filter(h => h.type === "day_off" && !h.territories);
+    const observances = nationalHolidays.filter(h => h.type === "observance");
+
+    // Helper to format date
+    const formatHolidayDate = (dateStr: string) => {
+      const date = parseIsoDate(dateStr);
+      if (!date) return dateStr;
+      return formatLong(date);
+    };
+
+    // Get the week number
+    const getWeekNum = (dateStr: string) => {
+      const date = parseIsoDate(dateStr);
+      if (!date) return "";
+      return `S${isoWeek(date).week}`;
+    };
+
+    // Count territories with Dec 7 substitute for 2026
+    const dec7Territories2026 = year === 2026
+      ? ["Andalucía", "Aragón", "Asturias", "Cantabria", "Castilla y León", "Extremadura", "Comunidad de Madrid", "Región de Murcia", "La Rioja", "Melilla"]
+      : [];
+
+    return (
+      <>
+        <section className="flex flex-col gap-4">
+          <h2 className="m-0 font-heading text-2xl font-bold">Festivos nacionales de {year}</h2>
+          <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+            <table className="w-full min-w-[600px] border-collapse text-left text-sm">
+              <thead className="bg-panel">
+                <tr>
+                  {["Fecha", "Festivo", "Semana", "Ámbito"].map((heading) => (
+                    <th key={heading} scope="col" className="px-4 py-3 font-semibold">{heading}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {daysOff.map((holiday) => (
+                  <tr key={holiday.date} className="border-t border-border">
+                    <td className="px-4 py-3 whitespace-nowrap">{formatHolidayDate(holiday.date)}</td>
+                    <td className="px-4 py-3">{holiday.name}</td>
+                    <td className="px-4 py-3 text-muted">{getWeekNum(holiday.date)}</td>
+                    <td className="px-4 py-3 text-sm text-muted">Nacional</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="m-0 text-sm text-muted">
+            Festivos nacionales retribuidos y no recuperables según el {boeSource}.
+          </p>
+        </section>
+
+        {observances.length > 0 && (
+          <section className="flex flex-col gap-4">
+            <h2 className="m-0 font-heading text-2xl font-bold">Fechas que caen en domingo</h2>
+            <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+              <table className="w-full min-w-[600px] border-collapse text-left text-sm">
+                <thead className="bg-panel">
+                  <tr>
+                    {["Observancia", "Fecha", "Sustitución"].map((heading) => (
+                      <th key={heading} scope="col" className="px-4 py-3 font-semibold">{heading}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {observances.map((holiday) => {
+                    const sub = nationalHolidays.find(h =>
+                      h.observanceDate === holiday.date && h.type === "day_off"
+                    );
+                    return (
+                      <tr key={holiday.date} className="border-t border-border">
+                        <td className="px-4 py-3">{holiday.name}</td>
+                        <td className="px-4 py-3 whitespace-nowrap">{formatHolidayDate(holiday.date)}</td>
+                        <td className="px-4 py-3">
+                          {sub ? (
+                            <span>
+                              {formatHolidayDate(sub.date)}
+                              {sub.territories && sub.territories.length < 19 && (
+                                <span className="ml-2 text-sm text-muted">
+                                  ({sub.territories.length} comunidades)
+                                </span>
+                              )}
+                            </span>
+                          ) : (
+                            <span className="text-muted">Sin traslado</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            {year === 2026 && (
+              <details className="rounded-xl border border-border bg-card p-4">
+                <summary className="cursor-pointer font-semibold">
+                  Ver las 10 comunidades que observan el 7 de diciembre
+                </summary>
+                <ul className="m-0 mt-3 columns-2 list-disc gap-8 pl-6 text-sm text-muted sm:columns-3">
+                  {dec7Territories2026.map((name) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm text-muted">
+                  Según el anexo del {boeSource}. Las demás comunidades no trasladan el festivo.
+                </p>
+              </details>
+            )}
+          </section>
+        )}
+
+        <section className="flex flex-col gap-4">
+          <h2 className="m-0 font-heading text-2xl font-bold">Festivos por comunidad autónoma</h2>
+          <p className="m-0 text-muted">
+            Cada comunidad autónoma añade sus propios festivos según el {boeSource}. Consulta{" "}
+            <Link href="/festivos-por-comunidad" className="font-medium">festivos por comunidad</Link>{" "}
+            para ver el detalle de cada territorio.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {TERRITORIES.slice(0, 6).map((territory) => {
+              const holidays = holidaysForYearAndTerritory(year, territory.slug as TerritorySlug);
+              const regional = holidays.filter(h => h.scope === "regional" && h.type === "day_off");
+              return (
+                <article key={territory.slug} className="rounded-xl border border-border bg-card p-4">
+                  <h3 className="m-0 font-heading text-base font-bold">{territory.name}</h3>
+                  <p className="mb-0 mt-1 text-sm text-muted">{regional.length} festivos autonómicos</p>
+                </article>
+              );
+            })}
+          </div>
+          <p className="m-0 text-sm text-muted">
+            Además de los festivos autonómicos, cada municipio establece 2 festivos locales.
+          </p>
+        </section>
+
+        <section className="flex flex-col gap-3">
+          <h2 className="m-0 font-heading text-2xl font-bold">Fuente oficial</h2>
+          <a
+            href={boeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-semibold"
+          >
+            <span>Resolución {boeSource} en el BOE</span>
+            <ArrowRightIcon className="size-4" />
+          </a>
+          <p className="m-0 text-sm text-muted">
+            Calendario laboral publicado por la Dirección General de Trabajo del Ministerio de Trabajo y Economía Social.
+          </p>
+        </section>
+      </>
     );
   }
 

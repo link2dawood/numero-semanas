@@ -9,6 +9,21 @@ export const consolidatedRedirects: { source: string; destination: string }[] = 
   { source: "/suscripcion-ical", destination: "/suscripcion-calendario" },
   { source: "/que-es-el-numero-de-semana", destination: "/numeros-de-semana" },
   { source: "/plantillas-calendario", destination: "/calendario-imprimible" },
+  // Holiday pages: redirect hyphenated to folder structure
+  { source: "/festivos-2020", destination: "/festivos/2020" },
+  { source: "/festivos-2021", destination: "/festivos/2021" },
+  { source: "/festivos-2022", destination: "/festivos/2022" },
+  { source: "/festivos-2023", destination: "/festivos/2023" },
+  { source: "/festivos-2024", destination: "/festivos/2024" },
+  { source: "/festivos-2025", destination: "/festivos/2025" },
+  { source: "/festivos-2026", destination: "/festivos/2026" },
+  { source: "/festivos-2027", destination: "/festivos/2027" },
+  { source: "/festivos-2028", destination: "/festivos/2028" },
+  // Community shortcuts
+  { source: "/festivos/madrid", destination: "/festivos/comunidad-de-madrid/2027" },
+  { source: "/festivos/cataluna", destination: "/festivos/cataluna/2027" },
+  { source: "/festivos/andalucia", destination: "/festivos/andalucia/2027" },
+  { source: "/festivos/valencia", destination: "/festivos/comunitat-valenciana/2027" },
 ];
 
 /**

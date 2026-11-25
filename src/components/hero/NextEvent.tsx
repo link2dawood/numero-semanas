@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { capitalize } from "@/lib/weeks";
 
 export type EventItem = {
@@ -5,6 +6,7 @@ export type EventItem = {
   name: string;
   week: number;
   daysUntil: number;
+  territories?: string[]; // If present and not all territories, holiday is regional
 };
 
 type NextEventProps = { event: EventItem | null };
@@ -14,6 +16,9 @@ function eventDateLabel(date: Date): string {
     new Intl.DateTimeFormat("es-ES", { weekday: "long" }).format(date),
   )} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
+
+// Total autonomous communities + cities: 19
+const TOTAL_TERRITORIES = 19;
 
 export default function NextEvent({ event }: NextEventProps) {
   if (!event) return null;
@@ -28,6 +33,9 @@ export default function NextEvent({ event }: NextEventProps) {
       : event.daysUntil === 1
         ? "día restante"
         : "días restantes";
+
+  // Show qualifier when holiday has territories but not all 19
+  const isRegionalSubstitute = event.territories && event.territories.length < TOTAL_TERRITORIES;
 
   return (
     <section
@@ -46,6 +54,16 @@ export default function NextEvent({ event }: NextEventProps) {
       >
         {event.name}
       </h2>
+      {isRegionalSubstitute && (
+        <p className="mb-1 text-xs font-medium text-amber-200/80">
+          <Link
+            href={`/festivos-${event.date.getFullYear()}#sustituciones`}
+            className="underline underline-offset-2 hover:text-amber-100"
+          >
+            Festivo en {event.territories!.length} comunidades
+          </Link>
+        </p>
+      )}
       <p className="mb-4 text-xs font-medium text-stone-300">
         {eventDateLabel(event.date)}
       </p>

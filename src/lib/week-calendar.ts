@@ -1,4 +1,4 @@
-import { holidays } from "@/lib/holidays";
+import { nationalHolidaysForYear } from "@/lib/holidays";
 import {
   addDays,
   formatLong,
@@ -16,10 +16,17 @@ export type WeekRow = {
 };
 
 export function getWeekRows(year: number): WeekRow[] {
+  // Get holidays for this year and potentially adjacent years (for weeks that span years)
+  const yearHolidays = [
+    ...nationalHolidaysForYear(year - 1),
+    ...nationalHolidaysForYear(year),
+    ...nationalHolidaysForYear(year + 1),
+  ].filter(h => h.type === "day_off"); // Only show actual days off, not observances
+
   return isoWeeksForYear(year).map((monday) => {
     const sunday = addDays(monday, 6);
     const week = isoWeek(monday).week;
-    const holidayNames = holidays
+    const holidayNames = yearHolidays
       .filter((holiday) => holiday.date >= localIso(monday) && holiday.date <= localIso(sunday))
       .map((holiday) => `${holiday.name} · ${formatLong(parseLocal(holiday.date))}`);
 

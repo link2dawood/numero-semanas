@@ -91,7 +91,11 @@ export default function WeekHero({ today }: WeekHeroProps) {
       .map((holiday) => {
         const [year, month, day] = holiday.date.split("-").map(Number);
         const date = new Date(year, month - 1, day);
-        return { date, name: holiday.name };
+        return {
+          date,
+          name: holiday.name,
+          territories: holiday.territories, // Pass through territory info for regional qualification
+        };
       })
       .filter((event) => calendarDayDifference(selected, event.date) >= 0)
       .slice(0, 5)

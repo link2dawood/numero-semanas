@@ -6,12 +6,13 @@ import { SITE_URL } from "./site";
  * escapes every string so nothing can break out of the <script> element.
  *
  * Deliberately NOT emitted:
- * - FAQPage: Google limits FAQ rich results to authoritative government and
- *   health sites, and the visible FAQs here are largely shared templates.
  * - Article/author/datePublished: there is no verified author or byline.
  * - Organization legalName/address/sameAs/contactPoint: not published anywhere
  *   on the site. Add them only once they are real and visible (e.g. Aviso legal).
  * - WebSite SearchAction: the site has no search results page.
+ *
+ * FAQPage: Use sparingly on pages with unique, genuinely helpful Q&A content.
+ * Google limits FAQ rich results but still supports them for utility sites.
  */
 
 export const SITE_NAME = "NumeroSemanas";
@@ -98,6 +99,32 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]): JsonLdNode {
       position: index + 1,
       name: entry.label,
       ...(entry.href ? { item: absoluteUrl(entry.href) } : {}),
+    })),
+  };
+}
+
+export type FaqItem = { question: string; answer: string };
+
+/** Strip HTML tags from a string for plain-text schema output. */
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, "");
+}
+
+/**
+ * FAQPage schema for pages with unique, helpful Q&A content.
+ * Use only on pages where FAQs are genuinely informative and unique to that page.
+ */
+export function faqPageJsonLd(faqs: FaqItem[]): JsonLdNode {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: stripHtml(faq.answer),
+      },
     })),
   };
 }

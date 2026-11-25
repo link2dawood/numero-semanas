@@ -2,19 +2,20 @@ import { createElement } from "react";
 import { Document, Page, StyleSheet, Text, View, renderToBuffer } from "@react-pdf/renderer";
 import { getWeekRows } from "@/lib/week-calendar";
 import { formatLong } from "@/lib/weeks";
+import { pdf as brand } from "@/lib/theme";
 
 export const runtime = "nodejs";
 
 const colors = {
-  ink: "#25301E",
-  forest: "#354628",
-  olive: "#667A4A",
-  sage: "#A9B58E",
-  cream: "#F7F4E9",
-  white: "#FFFFFF",
-  border: "#D6D0BD",
-  muted: "#737C69",
-  altRow: "#F1EEE3",
+  ink: brand.ink,
+  forest: brand.forest,
+  olive: brand.olive,
+  sage: brand.sage,
+  cream: brand.cream,
+  white: brand.white,
+  border: brand.border,
+  muted: brand.textMuted,
+  altRow: brand.muted,
 };
 
 const styles = StyleSheet.create({
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   eyebrow: {
     fontSize: 6.5,
     letterSpacing: 2.5,
-    color: "#D7DFC4",
+    color: brand.mint,
     marginBottom: 6,
     textTransform: "uppercase",
   },
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   subtitle: {
     marginTop: 4,
     fontSize: 8.5,
-    color: "#E9EDDF",
+    color: brand.mint,
   },
   heroRight: {
     flexDirection: "row",
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 12,
     borderRadius: 14,
-    backgroundColor: colors.sage,
+    backgroundColor: brand.amber,
   },
   rangeBadgeText: {
     fontSize: 7.5,
@@ -81,12 +82,12 @@ const styles = StyleSheet.create({
     fontSize: 6,
     fontWeight: 700,
     letterSpacing: 1,
-    color: colors.sage,
+    color: brand.amber,
   },
   yearNumber: {
     fontSize: 32,
     fontWeight: 700,
-    color: colors.sage,
+    color: brand.amber,
     marginTop: -2,
   },
   // Quarter sections
@@ -217,8 +218,7 @@ function QuarterTable({ rows, quarterLabel, quarterRange }: { rows: WeekRow[]; q
   );
 }
 
-function PDFPage({ rows, pageNumber, totalPages, rangeLabel, quarters }: {
-  rows: WeekRow[];
+function PDFPage({ pageNumber, totalPages, rangeLabel, quarters }: {
   pageNumber: number;
   totalPages: number;
   rangeLabel: string;
@@ -269,7 +269,6 @@ export async function GET() {
   const document = createElement(Document, { title: "Semanas 2027 - NumeroSemanas", author: "NumeroSemanas" },
     // Page 1: Weeks 1-26 (Q1 + Q2)
     createElement(PDFPage, {
-      rows: rows.slice(0, 26),
       pageNumber: 1,
       totalPages: 2,
       rangeLabel: "Semanas 1 – 26  ·  enero – junio",
@@ -280,7 +279,6 @@ export async function GET() {
     }),
     // Page 2: Weeks 27-52 (Q3 + Q4)
     createElement(PDFPage, {
-      rows: rows.slice(26),
       pageNumber: 2,
       totalPages: 2,
       rangeLabel: "Semanas 27 – 52  ·  julio – diciembre",

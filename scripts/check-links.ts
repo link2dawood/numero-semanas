@@ -20,10 +20,15 @@ const expectedFooter = unique([
   ...footerCompanyLinks.map((link) => link.href),
   ...FOOTER_EXTRA_LINKS,
 ]);
-const expectedNavbar = unique([
-  ...navigationLinks.map((link) => link.href),
-  ...HEADER_EXTRA_LINKS,
-]);
+// Flatten navigation: include direct hrefs and all children hrefs
+const navHrefs: string[] = navigationLinks.flatMap((item) =>
+  item.children
+    ? item.children.map((c) => c.href)
+    : item.href
+      ? [item.href]
+      : []
+);
+const expectedNavbar = unique([...navHrefs, ...HEADER_EXTRA_LINKS]);
 
 type LinkCheck = { route: string; status: number | string; location?: string };
 

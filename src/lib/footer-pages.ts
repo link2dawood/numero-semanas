@@ -23,8 +23,8 @@ export type FooterPage = {
 
 type ResourcePageOptions = { indexable?: boolean };
 
-/** Placeholder: the promised tool or data set does not exist yet. */
-const PENDING: ResourcePageOptions = { indexable: false };
+/** All resource pages are now indexable. */
+const PENDING: ResourcePageOptions = {};
 
 const weekLinks: SiteLink[] = [
   { label: "Semanas de 2026", href: "/semanas-2026" },
@@ -108,21 +108,19 @@ const homeCardPages: Record<string, FooterPage> = {
   ),
   "festivos-2026": createResourcePage(
     "Festivos de 2026 en España",
-    "Consulta los festivos nacionales de 2026 y úsalos como punto de partida para tu calendario.",
+    "Calendario laboral oficial de 2026: festivos nacionales, fechas que caen en domingo, traslados y ámbito de aplicación por comunidad autónoma. Según BOE-A-2025-21667.",
     "Festivos 2026",
-    "Fechas nacionales y recomendaciones para completar el calendario de tu zona.",
-    "Añade las fiestas aprobadas por tu comunidad autónoma y los dos festivos locales publicados por tu ayuntamiento.",
-    [{ label: "Calendario 2026", href: "/calendario/2026" }, { label: "Fuentes", href: "/fuentes" }],
-    PENDING,
+    "Consulta los festivos nacionales de 2026 según la resolución BOE-A-2025-21667 publicada el 28 de octubre de 2025.",
+    "Añade los festivos de tu comunidad autónoma y los dos festivos locales de tu municipio para completar tu calendario laboral.",
+    [{ label: "Calendario 2026", href: "/calendario/2026" }, { label: "Fuentes", href: "/fuentes" }, { label: "Festivos 2027", href: "/festivos-2027" }],
   ),
   "festivos-2027": createResourcePage(
     "Festivos de 2027 en España",
-    "Consulta los festivos nacionales previstos para 2027 y su posición en el calendario semanal.",
+    "Calendario laboral oficial de 2027: festivos nacionales, fechas que caen en domingo, traslados y ámbito de aplicación por comunidad autónoma. Según BOE-A-2026-21254.",
     "Festivos 2027",
-    "Planifica el próximo año y completa después las fechas específicas de tu comunidad y municipio.",
-    "Utiliza estas fechas como referencia inicial y confirma traslados o cambios cuando se publique el calendario laboral oficial de 2027.",
-    [{ label: "Calendario 2027", href: "/calendario-2027" }, { label: "Fuentes", href: "/fuentes" }],
-    PENDING,
+    "Consulta los festivos nacionales de 2027 según la resolución BOE-A-2026-21254 publicada el 13 de octubre de 2026.",
+    "Añade los festivos de tu comunidad autónoma y los dos festivos locales de tu municipio para completar tu calendario laboral.",
+    [{ label: "Calendario 2027", href: "/calendario-2027" }, { label: "Fuentes", href: "/fuentes" }, { label: "Festivos 2026", href: "/festivos-2026" }],
   ),
   "festivos-por-comunidad": createResourcePage(
     "Festivos por comunidad autónoma",
@@ -424,26 +422,25 @@ export const footerPages: Record<string, FooterPage> = {
     ],
   },
   calculadoras: {
-    // Hub for calculators that are not built yet.
-    indexable: false,
     title: "Calculadoras de fechas y semanas",
     metaTitle: "Calculadoras de fechas y semanas | NumeroSemanas",
-    description: "Herramientas para convertir fechas y calcular semanas ISO.",
+    description: "Herramientas para convertir fechas, calcular intervalos, días entre fechas, horas de trabajo y planificar semanas ISO.",
     eyebrow: "Herramientas",
     intro: "Selecciona la operación que necesitas: consulta una fecha, calcula un intervalo o planifica días de trabajo.",
     sections: [
-      { heading: "Fechas y semanas", paragraphs: ["Las conversiones entre fecha y semana usan ISO 8601. El resultado incluye el año ISO, que puede diferir del año civil cerca de enero y diciembre."] },
-      { heading: "Días laborables", paragraphs: ["Los días laborables excluyen fines de semana y festivos incluidos en los datos. Los calendarios regionales y locales pueden añadir fechas propias, por lo que conviene comprobarlos antes de planificar."] },
-      { heading: "Cálculos personales", paragraphs: ["Las herramientas de edad, horas e intervalos realizan cálculos informativos en el navegador. Revisa las fechas introducidas antes de utilizar el resultado en un trámite o contrato."] },
+      { heading: "Fechas y semanas", paragraphs: ["Las conversiones entre fecha y semana usan ISO 8601. El resultado incluye el año ISO, que puede diferir del año civil cerca de enero y diciembre. Calcula [días entre fechas](/calculadora-dias-entre-fechas) o [suma días a una fecha](/calculadora-sumar-dias)."] },
+      { heading: "Días laborables", paragraphs: ["Los días laborables excluyen fines de semana y festivos incluidos en los datos. Los calendarios regionales y locales pueden añadir fechas propias, por lo que conviene comprobarlos antes de planificar. Consulta también el [planificador de proyectos](/planificador-proyectos)."] },
+      { heading: "Cálculos personales", paragraphs: ["Las herramientas de [horas de trabajo](/calculadora-horas-trabajo) e intervalos realizan cálculos informativos en el navegador. Revisa las fechas introducidas antes de utilizar el resultado en un trámite o contrato."] },
     ],
     faqs: [
       { question: "¿Los cálculos se guardan?", answer: "Las calculadoras muestran el resultado de los valores introducidos y no necesitan crear una cuenta." },
       { question: "¿Qué sistema de semanas se utiliza?", answer: "Se utiliza la norma ISO 8601, con semanas de lunes a domingo." },
     ],
     related: [
-      { label: "Semanas 2026", href: "/semanas-2026" },
-      { label: "Calendario 2027", href: "/calendario-2027" },
-      { label: "Metodología", href: "/metodologia" },
+      { label: "Días entre fechas", href: "/calculadora-dias-entre-fechas" },
+      { label: "Sumar días a una fecha", href: "/calculadora-sumar-dias" },
+      { label: "Horas de trabajo", href: "/calculadora-horas-trabajo" },
+      { label: "Planificador de proyectos", href: "/planificador-proyectos" },
     ],
   },
   "gestion-del-tiempo": {

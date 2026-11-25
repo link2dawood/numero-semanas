@@ -95,10 +95,22 @@ export const semantic = {
 // =============================================================================
 
 export const pdf = {
-  forest: "#354628",
-  olive: "#667A4A",
-  sage: "#A9B58E",
-  cream: "#F7F4E9",
+  ink: semantic.ink,
+  forest: colors.forest[800],
+  forestHover: colors.forest[700],
+  olive: colors.olive[600],
+  oliveDark: colors.olive[700],
+  sage: colors.olive[500],
+  mint: colors.olive[100],
+  cream: colors.sand[100],
+  panel: colors.sand[50],
+  muted: colors.sand[200],
+  border: colors.sand.border,
+  borderMuted: colors.sand[400],
+  textMuted: semantic.textMuted,
+  amber: colors.amber[400],
+  amberSoft: colors.amber.soft,
+  white: colors.white,
 } as const;
 
 // =============================================================================

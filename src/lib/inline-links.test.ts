@@ -28,6 +28,11 @@ describe("editorial inline links", () => {
     "/semanas-2026",
     "/lista-semanas-2027",
     "/calendario-2027",
+    "/calculadora-dias-entre-fechas",
+    "/calculadora-sumar-dias",
+    "/calculadora-horas-trabajo",
+    "/planificador-vacaciones",
+    "/planificador-proyectos",
     ...Object.keys(footerPages).map((slug) => `/${slug}`),
     ...Array.from({ length: 16 }, (_, i) => [`/semanas/${2020 + i}`, `/calendario/${2020 + i}`]).flat(),
   ]);

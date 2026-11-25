@@ -14,6 +14,7 @@ import {
   isoWeeksForYear,
   parseIsoDate,
 } from "@/lib/weeks";
+import { pdf as brand } from "@/lib/theme";
 
 export const runtime = "nodejs";
 
@@ -24,12 +25,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 36,
     fontFamily: "Helvetica",
     fontSize: 10,
-    color: "#2B3620",
-    backgroundColor: "#FBFAF4",
+    color: brand.ink,
+    backgroundColor: brand.cream,
   },
   brandBar: {
     height: 8,
-    backgroundColor: "#627545",
+    backgroundColor: brand.amber,
     marginHorizontal: -36,
     marginTop: -42,
     marginBottom: 22,
@@ -38,32 +39,32 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: 700,
     letterSpacing: 1.4,
-    color: "#7E8F69",
+    color: brand.olive,
     textTransform: "uppercase",
   },
   title: {
     fontSize: 24,
     fontWeight: 700,
-    color: "#3F4F2C",
+    color: brand.forest,
     marginTop: 5,
     marginBottom: 7,
   },
-  description: { fontSize: 10, color: "#637052", marginBottom: 20 },
+  description: { fontSize: 10, color: brand.textMuted, marginBottom: 20 },
   row: {
     flexDirection: "row",
     minHeight: 23,
     alignItems: "center",
   },
   heading: {
-    backgroundColor: "#3F4F2C",
-    color: "#FFFFFF",
+    backgroundColor: brand.forest,
+    color: brand.white,
     fontWeight: 700,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
   },
-  alternateRow: { backgroundColor: "#F0EDDF" },
+  alternateRow: { backgroundColor: brand.muted },
   cell: { flex: 1, paddingVertical: 5, paddingHorizontal: 6 },
-  firstCell: { color: "#627545", fontWeight: 700 },
+  firstCell: { color: brand.oliveDark, fontWeight: 700 },
   footer: {
     position: "absolute",
     left: 36,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    color: "#7A826F",
+    color: brand.textMuted,
     fontSize: 8,
   },
 });

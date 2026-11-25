@@ -3,6 +3,12 @@ export type SiteLink = {
   href: string;
 };
 
+export type NavItem = {
+  label: string;
+  href?: string;
+  children?: SiteLink[];
+};
+
 export type Faq = {
   question: string;
   answer: string;
@@ -10,14 +16,52 @@ export type Faq = {
   note?: string;
 };
 
-export const navigationLinks: SiteLink[] = [
-  { label: "Semanas 2026", href: "/semanas-2026" },
-  { label: "Lista de semanas 2027", href: "/lista-semanas-2027" },
-  { label: "Calendario 2027", href: "/calendario-2027" },
-  { label: "Calculadoras", href: "/calculadoras" },
+export const navigationLinks: NavItem[] = [
+  { label: "Inicio", href: "/" },
   {
-    label: "Sobre las semanas",
-    href: "/numeros-de-semana",
+    label: "Número de semana",
+    children: [
+      { label: "Semana actual", href: "/" },
+      { label: "Semanas 2026", href: "/semanas-2026" },
+      { label: "Semanas 2027", href: "/semanas/2027" },
+      { label: "Qué es el número de semana", href: "/numeros-de-semana" },
+    ],
+  },
+  {
+    label: "Calendario",
+    children: [
+      { label: "Calendario 2027", href: "/calendario-2027" },
+      { label: "Calendario mensual", href: "/calendario-mensual" },
+      { label: "Calendario imprimible", href: "/calendario-imprimible" },
+    ],
+  },
+  {
+    label: "Días festivos",
+    children: [
+      { label: "Festivos 2026", href: "/festivos-2026" },
+      { label: "Festivos 2027", href: "/festivos-2027" },
+      { label: "Festivos por comunidad", href: "/festivos-por-comunidad" },
+      { label: "Vacaciones escolares", href: "/vacaciones-escolares" },
+    ],
+  },
+  {
+    label: "Calculadoras",
+    children: [
+      { label: "Todas las calculadoras", href: "/calculadoras" },
+      { label: "Días entre fechas", href: "/calculadora-dias-entre-fechas" },
+      { label: "Sumar o restar días", href: "/calculadora-sumar-dias" },
+      { label: "Calculadora de semanas", href: "/calculadora-semanas" },
+      { label: "Calculadora de edad", href: "/calculadora-edad" },
+    ],
+  },
+  {
+    label: "Planificadores",
+    children: [
+      { label: "Puentes 2027", href: "/puentes-2027" },
+      { label: "Días laborables 2027", href: "/dias-laborables-2027" },
+      { label: "Calculadora de vacaciones", href: "/calculadora-vacaciones" },
+      { label: "Calendario laboral", href: "/calendario-laboral" },
+    ],
   },
 ];
 
